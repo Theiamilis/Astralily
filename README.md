@@ -1,8 +1,26 @@
-# AstraLily
+<p align="center">
+  <img src="lily_mobile_realm_android/app/src/main/res/drawable-nodpi/lily_logo.png" width="112" alt="AstraLily logo: an L framed by stars and a lily">
+</p>
 
-AstraLily is a personal AI assistant system built around a FastAPI core, independent capability services, Android and browser clients, voice synthesis, and optional Live2D presentation. The character name is configurable; existing `lily_*` source paths are retained for compatibility.
+<h1 align="center">AstraLily</h1>
 
-Start with the [engineering overview](docs/ENGINEERING.md) for the request flow, recent changes, and testing limits.
+<p align="center">A self-hosted assistant with browser and Android clients, plus separate services for voice, messaging, tools, and device control.</p>
+
+<p align="center">
+  <a href="./PUBLIC_SETUP.md">Run it locally</a> ·
+  <a href="./docs/ENGINEERING.md">Architecture and demo notes</a> ·
+  <a href="./SYSTEM_BOUNDARIES.md">Service boundaries</a>
+</p>
+
+AstraLily keeps the assistant's conversation core separate from the services that handle voice, WhatsApp, tools, and local devices. The assistant persona is Lily; the project name is AstraLily. Existing `lily_*` source paths remain for compatibility.
+
+This repository is a generated public source snapshot. It is not a hosted service or a ready-made installer. Local assets, credentials, personal data, and model weights are intentionally excluded.
+
+## Start here
+
+The quickest local path is Core plus the Private Realm desktop companion. Follow [PUBLIC_SETUP.md](PUBLIC_SETUP.md) to install dependencies, configure a text provider, and start both services. Optional vessels and Android can be added afterward.
+
+For the request flow, deployment boundaries, and a reproducible demo checklist, see the [engineering overview](docs/ENGINEERING.md).
 
 ## Current capabilities
 
