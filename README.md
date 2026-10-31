@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="lily_mobile_realm_android/app/src/main/res/drawable-nodpi/lily_logo.png" width="112" alt="AstraLily logo: an L framed by stars and a lily">
+  <img src="docs/assets/astralily-mark.svg" width="112" height="112" alt="AstraLily star and A mark">
 </p>
 
 <h1 align="center">AstraLily</h1>
