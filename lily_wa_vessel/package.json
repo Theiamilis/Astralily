@@ -1,0 +1,17 @@
+{
+  "name": "lily-wa-vessel",
+  "version": "1.0.0",
+  "description": "WhatsApp vessel for Lily AI",
+  "main": "bridge.js",
+  "scripts": {
+    "start": "node bridge.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.3.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.6.1",
+    "qrcode-terminal": "^0.12.0",
+    "wake_on_lan": "^1.0.0",
+    "whatsapp-web.js": "1.34.7"
+  }
+}

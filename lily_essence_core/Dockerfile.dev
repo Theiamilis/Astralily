@@ -1,0 +1,24 @@
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app/lily_essence_core
+
+COPY lily_essence_core/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt \
+    && useradd --create-home --uid 10001 lily
+
+COPY --chown=lily:lily lily_essence_core/ /app/lily_essence_core/
+COPY --chown=lily:lily config/ /app/config/
+
+RUN mkdir -p /var/lib/lily-dev /app/lily_essence_core/static/audio \
+    && chown -R lily:lily /var/lib/lily-dev /app/lily_essence_core/static/audio
+
+USER lily
+
+EXPOSE 8000
+
+CMD ["uvicorn", "web_server:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]

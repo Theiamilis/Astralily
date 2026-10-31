@@ -1,0 +1,16 @@
+[Unit]
+Description=Lily WhatsApp Bridge Gateway (Public Number)
+After=network-online.target lily-wa.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=PENGGUNA_LINUX_ANDA
+WorkingDirectory=/path/to/lily_wa_vessel
+Environment=LILY_WA_PROFILE=public
+ExecStart=/path/to/lily_wa_vessel/start_linux.sh public
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

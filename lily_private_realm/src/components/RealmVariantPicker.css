@@ -1,0 +1,120 @@
+.realm-variant-picker {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 80;
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+  color: #6f425f;
+  font: inherit;
+}
+
+.realm-variant-picker--classic {
+  top: 18px;
+  right: 24px;
+  bottom: auto;
+}
+
+.realm-variant-toggle,
+.realm-variant-options button {
+  min-height: 34px;
+  border: 1px solid rgba(209, 158, 188, 0.58);
+  border-radius: 999px;
+  color: #6f425f;
+  background: rgba(255, 250, 253, 0.72);
+  box-shadow: 0 16px 36px rgba(97, 56, 88, 0.15);
+  backdrop-filter: blur(18px);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.realm-variant-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  opacity: 0.5;
+}
+
+.realm-variant-toggle span {
+  color: var(--text-label, #a5678d);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.realm-variant-picker:hover .realm-variant-toggle,
+.realm-variant-picker.is-open .realm-variant-toggle {
+  opacity: 1;
+}
+
+.realm-variant-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.realm-variant-picker--classic .realm-variant-options {
+  transform: translateY(-8px) scale(0.98);
+}
+
+.realm-variant-picker.is-open .realm-variant-options {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.realm-variant-options button {
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+.realm-variant-options button:hover {
+  transform: translateX(-2px);
+  box-shadow: 0 20px 42px rgba(97, 56, 88, 0.2);
+}
+
+.realm-variant-options button.is-active {
+  color: #fff;
+  background: linear-gradient(135deg, #4f2c45, #f2579d);
+  box-shadow: 0 14px 28px rgba(242, 87, 157, 0.28);
+}
+
+@media (max-width: 720px) {
+  .realm-variant-picker {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .realm-variant-picker--classic {
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .realm-variant-toggle {
+    min-height: 32px;
+    padding: 0 11px;
+    font-size: 10px;
+  }
+
+  .realm-variant-options button {
+    min-height: 31px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+}

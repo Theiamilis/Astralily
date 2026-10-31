@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "devices": [
+    {
+      "id": "local_dev",
+      "label": "Local Development Machine",
+      "host": "127.0.0.1",
+      "aliases": [
+        "localhost"
+      ],
+      "profiles": [
+        "public-local"
+      ],
+      "services": [
+        "private_realm",
+        "control_center",
+        "iris_launcher",
+        "core",
+        "wa_personal",
+        "tool_vessel",
+        "wa_public",
+        "gpt_sovits",
+        "voice_vessel",
+        "stt_vessel",
+        "home_vessel",
+        "model_vessel",
+        "mobile_realm"
+      ]
+    }
+  ],
+  "notes": [
+    "This example topology is intentionally generic and contains no private hostnames.",
+    "Split services across your own devices after copying config/topology.json locally."
+  ]
+}

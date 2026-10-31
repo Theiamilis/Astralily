@@ -1,0 +1,44 @@
+name: Public Edition CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate public source safety
+        run: python scripts/github_publish_check.py
+
+      - name: Validate registries
+        run: |
+          python scripts/ports.py check
+          python scripts/topology.py check
+
+      - name: Compile included Python source
+        run: >-
+          python -m compileall -q
+          lily_essence_core
+          lily_voice_vessel
+          lily_tool_vessel
+          lily_file_vessel
+          lily_model_vessel
+          lily_home_vessel
+          lily_stt_vessel
+
+      - name: Validate WhatsApp bridge syntax
+        run: node --check lily_wa_vessel/bridge.js
+
+      - name: Validate publish checker contract
+        run: python -m tests.ops.test_github_publish_check_contract

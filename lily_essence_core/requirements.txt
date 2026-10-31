@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic
+openai
+google-generativeai
+httpx
+python-multipart
+motor
+python-dotenv
+cryptography>=42
+requests
+dashscope>=1.26.4
+TikTokLive

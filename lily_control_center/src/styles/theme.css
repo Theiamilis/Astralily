@@ -1,0 +1,343 @@
+@custom-variant dark (&:is(.dark *));
+
+.control-center-classic {
+  --cc-line: rgba(159, 99, 131, 0.2);
+  font-family: "Yu Gothic UI", "Noto Sans JP", "Meiryo UI", "Meiryo", "Segoe UI", sans-serif;
+}
+
+.control-center-classic .control-center-grid {
+  opacity: 0.55;
+}
+
+.control-center-classic .control-center-sidebar,
+.control-center-classic .control-center-workspace > * {
+  border-color: var(--cc-line) !important;
+  box-shadow: 0 12px 30px rgba(74, 45, 63, 0.09) !important;
+}
+
+.control-center-classic [class*="rounded-[34px]"],
+.control-center-classic [class*="rounded-[30px]"],
+.control-center-classic [class*="rounded-[28px]"],
+.control-center-classic [class*="rounded-[26px]"],
+.control-center-classic [class*="rounded-[22px]"],
+.control-center-classic [class*="rounded-[20px]"],
+.control-center-classic [class*="rounded-[18px]"] {
+  border-radius: 8px !important;
+}
+
+.control-center-classic [class*="tracking-[-"] {
+  letter-spacing: 0 !important;
+}
+
+.control-center-classic button:focus-visible,
+.control-center-classic input:focus-visible {
+  outline: 2px solid #a84e7a;
+  outline-offset: 2px;
+}
+
+@media (max-width: 1280px) {
+  .control-center-classic {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .control-center-classic .control-center-frame {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100%;
+    transform: none !important;
+  }
+
+  .control-center-classic .control-center-canvas {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 1080px;
+    grid-template-columns: 260px minmax(0, 1fr) !important;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .control-center-classic .control-center-sidebar {
+    padding: 16px !important;
+  }
+
+  .control-center-classic .control-center-workspace {
+    grid-template-rows: 148px 532px auto;
+    gap: 12px;
+  }
+
+  .control-center-classic .control-center-workspace > :last-child {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-rows: 332px;
+    gap: 12px;
+  }
+
+  .control-center-classic .control-center-workspace > :last-child > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .control-center-classic {
+    height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .control-center-frame {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+  .control-center-canvas {
+    width: 100vw !important;
+    height: auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .control-center-sidebar {
+    min-height: 0;
+    padding: 14px !important;
+  }
+
+  .control-center-sidebar .control-center-avatar-stage + div {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .control-center-sidebar .control-center-avatar-stage + div > span {
+    width: 100%;
+    text-align: left;
+  }
+
+  .control-center-avatar-stage {
+    display: none;
+  }
+
+  .control-center-workspace {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .control-center-workspace > :first-child {
+    display: block !important;
+  }
+
+  .control-center-workspace > :first-child > :first-child {
+    display: none;
+  }
+
+  .control-center-workspace > :first-child > :last-child {
+    height: auto !important;
+    min-height: 220px;
+  }
+
+  .control-center-workspace > :nth-child(2) {
+    min-height: 1180px;
+  }
+
+  .control-center-workspace > :nth-child(2) > div {
+    grid-template-columns: 1fr !important;
+  }
+
+  .control-center-classic .control-center-workspace > :last-child {
+    grid-template-columns: 1fr !important;
+  }
+
+  .control-center-workspace [class*="h-[332px]"] {
+    height: auto !important;
+    min-height: 332px;
+  }
+}
+
+:root {
+  --font-size: 16px;
+  --background: #fff8fc;
+  --foreground: #412f3b;
+  --card: #fffdfd;
+  --card-foreground: #412f3b;
+  --popover: #fffdfd;
+  --popover-foreground: #412f3b;
+  --primary: #df4a8e;
+  --primary-foreground: oklch(1 0 0);
+  --secondary: #f5e9f1;
+  --secondary-foreground: #5c334b;
+  --muted: #f4eaf1;
+  --muted-foreground: #775e71;
+  --accent: #f5e4ee;
+  --accent-foreground: #5c334b;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: #e9cddd;
+  --input: transparent;
+  --input-background: #fffafc;
+  --switch-background: #d9bdce;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #b896d5;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: #fff8fc;
+  --sidebar-foreground: #412f3b;
+  --sidebar-primary: #df4a8e;
+  --sidebar-primary-foreground: #fff8fc;
+  --sidebar-accent: #f5e4ee;
+  --sidebar-accent-foreground: #5c334b;
+  --sidebar-border: #e9cddd;
+  --sidebar-ring: #b896d5;
+}
+
+.dark {
+  --background: #251a24;
+  --foreground: #f6eaf1;
+  --card: #342635;
+  --card-foreground: #f6eaf1;
+  --popover: #342635;
+  --popover-foreground: #f6eaf1;
+  --primary: #f05a9d;
+  --primary-foreground: #281a25;
+  --secondary: #493449;
+  --secondary-foreground: #f6eaf1;
+  --muted: #493449;
+  --muted-foreground: #c7aebe;
+  --accent: #493449;
+  --accent-foreground: #f6eaf1;
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: #674a61;
+  --input: #493449;
+  --ring: #b896d5;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: #2e202d;
+  --sidebar-foreground: #f6eaf1;
+  --sidebar-primary: #f05a9d;
+  --sidebar-primary-foreground: #281a25;
+  --sidebar-accent: #493449;
+  --sidebar-accent-foreground: #f6eaf1;
+  --sidebar-border: #674a61;
+  --sidebar-ring: #b896d5;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Yu Gothic UI", "Noto Sans JP", "Meiryo UI", "Meiryo", "Segoe UI", sans-serif;
+  }
+
+  /**
+  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
+  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  */
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}

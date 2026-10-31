@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="iris-csrf" content="__IRIS_CSRF_TOKEN__" />
+    <title>IRIS Launcher</title>
+    <link rel="stylesheet" href="/styles.css?v=iris-navigation-3" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="app-shell">
+      <aside class="rail">
+        <a class="brand" href="#top" aria-label="IRIS Launcher home">
+          <span class="brand-mark" aria-hidden="true"><i></i><b>I</b></span>
+          <span>
+            <strong>IRIS</strong>
+            <small>LOCAL CONSTELLATION</small>
+          </span>
+        </a>
+
+        <nav class="rail-nav" aria-label="Launcher sections">
+          <a class="active" href="#overview"><span>01</span> Overview</a>
+          <a href="#services"><span>02</span> Services</a>
+          <a href="#diagnostics"><span>03</span> Diagnostics</a>
+        </nav>
+
+        <div class="rail-foot">
+          <span class="local-seal">LOCAL ONLY</span>
+          <p>Bound to this PC.<br />No launcher controls are exposed to LAN.</p>
+          <button class="text-button" id="quit-launcher" type="button">Quit launcher</button>
+        </div>
+      </aside>
+
+      <main id="top">
+        <header class="topbar" data-tauri-drag-region>
+          <div>
+            <p class="eyebrow">INTERCONNECTED REALM INTELLIGENCE SYSTEM</p>
+            <p class="date-line" id="date-line">LOCAL SESSION</p>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" id="edit-setup" type="button" aria-label="Open setup wizard">SETUP</button>
+            <button class="icon-button" id="edit-prompts" type="button">PROMPTS</button>
+            <button class="icon-button" id="edit-secretary" type="button">SECRETARY</button>
+            <button class="icon-button" id="edit-devices" type="button">DEVICES</button>
+            <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to light mode">
+              <span data-theme-label>LIGHT MODE</span>
+            </button>
+            <span class="global-state"><i id="global-dot"></i><span id="global-label">CHECKING</span></span>
+            <div class="window-controls" aria-label="Window controls">
+              <button class="window-control window-control-close" id="window-close" type="button" aria-label="Close launcher" title="Close"><span aria-hidden="true">×</span></button>
+              <button class="window-control" id="window-minimize" type="button" aria-label="Minimize launcher" title="Minimize"><span aria-hidden="true">−</span></button>
+              <button class="window-control" id="window-maximize" type="button" aria-label="Maximize launcher" title="Maximize"><span aria-hidden="true">↗</span></button>
+            </div>
+          </div>
+        </header>
+
+        <section class="hero reveal" id="overview">
+          <div class="hero-copy">
+            <p class="section-index">/ 01 &nbsp; CONSTELLATION CONTROL</p>
+            <h1>One quiet place<br />to wake the <em>whole system.</em></h1>
+            <p class="hero-lede">
+              Start the brain, voice, and private room without touching a terminal.
+              IRIS follows the repository's existing launch rules and keeps local secrets out of this screen.
+            </p>
+            <div class="hero-actions">
+              <button class="primary-button" id="launch-all" type="button">
+                <span>Launch constellation</span><b>↗</b>
+              </button>
+              <button class="secondary-button" id="open-realm" type="button">Open Private Realm</button>
+              <button class="ghost-button" id="stop-all" type="button">Stop all</button>
+            </div>
+          </div>
+
+          <div class="orbit-panel" aria-label="Constellation service status">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="orbit orbit-three"></div>
+            <div class="orbit-star star-a" data-orbit-service="voice"><i></i><span>VOICE</span></div>
+            <div class="orbit-star star-b" data-orbit-service="private"><i></i><span>REALM</span></div>
+            <div class="orbit-star star-c" data-orbit-service="core"><i></i><span>CORE</span></div>
+            <div class="orbit-center">
+              <span>IRIS</span>
+              <strong id="online-count">0/3</strong>
+              <small>SIGNALS ONLINE</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="section reveal reveal-delay" id="services">
+          <div class="section-heading">
+            <div>
+              <p class="section-index">/ 02 &nbsp; SERVICE DECK</p>
+              <h2>Three signals. One room.</h2>
+            </div>
+            <button class="text-button" id="refresh-status" type="button">Refresh signals ↻</button>
+          </div>
+          <div class="service-grid" id="service-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="section diagnostics reveal" id="diagnostics">
+          <div class="section-heading diagnostics-heading">
+            <div>
+              <p class="section-index">/ 03 &nbsp; PREFLIGHT</p>
+              <h2>Nothing hidden under the floorboards.</h2>
+            </div>
+            <span class="readiness" id="readiness">CHECKING SETUP</span>
+          </div>
+
+          <div class="diagnostic-layout">
+            <div class="check-panel">
+              <div class="panel-label">LOCAL READINESS</div>
+              <div id="check-list" class="check-list"></div>
+            </div>
+            <div class="log-panel">
+              <div class="panel-label">
+                <span>RECENT ACTIVITY</span>
+                <button class="text-button" id="refresh-logs" type="button">Refresh</button>
+              </div>
+              <pre id="activity-log">Waiting for the first signal…</pre>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="setup-dialog" class="setup-dialog" aria-labelledby="setup-heading">
+      <form id="setup-form" method="dialog">
+        <header class="prompt-header">
+          <div><p class="eyebrow">CONFIGURATION / FIRST-LIGHT SEQUENCE</p><h2 id="setup-heading">Constellation setup.</h2></div>
+          <button class="ghost-button" id="close-setup" type="button" aria-label="Close setup">Close ×</button>
+        </header>
+        <aside class="setup-aside">
+          <div class="mini-brand">IRIS</div>
+          <p class="eyebrow">FIRST-LIGHT SEQUENCE</p>
+          <h2>Set the constellation once.</h2>
+          <p>Existing values are prefilled. Secret values are never sent back to this screen.</p>
+          <ol class="step-list">
+            <li class="active" data-step-marker="0"><span>01</span> Connection</li>
+            <li data-step-marker="1"><span>02</span> Intelligence</li>
+            <li data-step-marker="2"><span>03</span> Voice & vessel</li>
+            <li data-step-marker="3"><span>04</span> Final check</li>
+          </ol>
+        </aside>
+
+        <div class="setup-main">
+          <div class="setup-progress"><i id="setup-progress"></i></div>
+
+          <section class="setup-step active" data-step="0">
+            <p class="section-index">STEP 01 / CONNECTION</p>
+            <h3>Where does your Core live?</h3>
+            <p class="step-intro">For this PC, keep the loopback address. You can use a LAN or Tailscale URL later.</p>
+            <label class="field">
+              <span>Core URL</span>
+              <input name="core_url" type="url" required placeholder="http://127.0.0.1:8000" />
+              <small>Private Realm sends chat, health checks, and audio requests here.</small>
+            </label>
+            <label class="field secret-field">
+              <span>Owner API token</span>
+              <input name="owner_token" type="password" autocomplete="new-password" placeholder="Leave blank to keep the current token" />
+              <small id="owner-token-status">Enter one token to synchronize Core and Realm.</small>
+            </label>
+          </section>
+
+          <section class="setup-step" data-step="1">
+            <p class="section-index">STEP 02 / INTELLIGENCE</p>
+            <h3>Choose the brain route.</h3>
+            <p class="step-intro">LM Studio is easiest for a local model. OpenAI-compatible works with a remote or custom endpoint.</p>
+            <div class="choice-row" role="radiogroup" aria-label="Brain provider">
+              <label class="choice-card">
+                <input type="radio" name="brain_provider" value="lmstudio" />
+                <span><b>LM Studio</b><small>Local and private</small></span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="brain_provider" value="openai_compat" />
+                <span><b>OpenAI-compatible</b><small>Remote or custom</small></span>
+              </label>
+            </div>
+            <div class="two-column-fields">
+              <label class="field">
+                <span>Endpoint</span>
+                <input name="provider_base" type="url" required />
+              </label>
+              <label class="field">
+                <span>Model name</span>
+                <input name="brain_model" required />
+              </label>
+            </div>
+            <label class="field secret-field">
+              <span>Provider API key</span>
+              <input name="provider_api_key" type="password" autocomplete="new-password" placeholder="Optional — blank keeps the current key" />
+              <small id="provider-key-status">Local LM Studio normally does not need a key.</small>
+            </label>
+          </section>
+
+          <section class="setup-step" data-step="2">
+            <p class="section-index">STEP 03 / VOICE & VESSEL</p>
+            <h3>Give the room a voice.</h3>
+            <p class="step-intro">Model files stay local and ignored by Git. The launcher only stores their routing configuration.</p>
+            <div class="choice-row three" role="radiogroup" aria-label="Voice mode">
+              <label class="choice-card">
+                <input type="radio" name="voice_mode" value="local" />
+                <span><b>Local voice</b><small>GPT-SoVITS on this PC</small></span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="voice_mode" value="remote" />
+                <span><b>Remote vessel</b><small>Voice on another PC</small></span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="voice_mode" value="off" />
+                <span><b>Text only</b><small>No voice service</small></span>
+              </label>
+            </div>
+            <label class="field">
+              <span>Voice Vessel URL</span>
+              <input name="voice_service_url" type="url" required />
+            </label>
+            <div class="two-column-fields">
+              <label class="field">
+                <span>Voice provider</span>
+                <select name="voice_provider">
+                  <option value="sovits">SoVITS</option>
+                  <option value="sovits2">SoVITS 2</option>
+                  <option value="rvc">RVC</option>
+                  <option value="alibaba">Alibaba</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Profile ID</span>
+                <input name="voice_profile" required placeholder="ja" />
+              </label>
+            </div>
+            <div class="two-column-fields">
+              <label class="field">
+                <span>Live2D model URL</span>
+                <input name="live2d_model_url" required />
+              </label>
+              <label class="field">
+                <span>Room style</span>
+                <select name="realm_variant">
+                  <option value="classic">Classic</option>
+                  <option value="sweet-room">Sweet Room</option>
+                  <option value="pet">Pet</option>
+                </select>
+              </label>
+            </div>
+          </section>
+
+          <section class="setup-step" data-step="3">
+            <p class="section-index">STEP 04 / FINAL CHECK</p>
+            <h3>Ready for first light.</h3>
+            <p class="step-intro">IRIS will update only the selected environment keys. Existing comments, model files, and unrelated settings stay untouched.</p>
+            <div class="summary-card" id="setup-summary"></div>
+            <div class="privacy-note">
+              <b>Secrets stay on this PC.</b>
+              <span>Tokens are written to ignored <code>.env</code> files and are never returned to the browser.</span>
+            </div>
+          </section>
+
+          <footer class="setup-footer">
+            <button class="ghost-button" id="setup-back" type="button">Back</button>
+            <span id="setup-error" role="alert"></span>
+            <button class="primary-button" id="setup-next" type="button"><span>Continue</span><b>→</b></button>
+          </footer>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="prompt-editor" class="prompt-editor" aria-labelledby="prompt-heading">
+      <header class="prompt-header">
+        <div><p class="eyebrow">PERSONALITY / INSTRUCTIONS</p><h2 id="prompt-heading">Prompt studio.</h2></div>
+        <button class="ghost-button" id="prompt-close" type="button" aria-label="Close prompt editor">Close ×</button>
+      </header>
+      <p id="prompt-target" class="step-intro">Connecting to your configured Core…</p>
+      <div class="prompt-layout">
+        <nav id="prompt-list" aria-label="Prompt templates"></nav>
+        <section class="prompt-workspace">
+          <label for="prompt-text" id="prompt-label">Select a template</label>
+          <p id="prompt-description"></p>
+          <p id="prompt-variables" class="date-line"></p>
+          <textarea id="prompt-text" spellcheck="false" maxlength="16000" disabled></textarea>
+          <details><summary>Read-only application boundaries</summary><p>Privacy, tool permissions, execution confirmations and per-channel rules remain separate. Templates guide model behavior; they do not grant new permissions.</p></details>
+          <details><summary>Original template</summary><pre id="prompt-default"></pre></details>
+        </section>
+      </div>
+      <footer class="prompt-footer">
+        <span id="prompt-status" role="status" aria-live="polite"></span>
+        <button class="ghost-button" id="prompt-reload" type="button">Reload</button>
+        <button class="ghost-button" id="prompt-reset" type="button" disabled>Reset to default</button>
+        <button class="primary-button" id="prompt-save" type="button" disabled>Save prompt</button>
+      </footer>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog id="device-editor" class="prompt-editor" aria-labelledby="device-heading">
+      <header class="prompt-header"><div><p class="eyebrow">NETWORK / ROUTING</p><h2 id="device-heading">Devices &amp; vessels.</h2></div>
+        <button class="ghost-button" id="device-close" type="button">Close ×</button></header>
+      <p id="device-target" class="step-intro">Loading active Core routes…</p>
+      <p class="device-note">Addresses are interpreted from Core, not this PC. Moving a route does not install or start the vessel. Core relocation stays in Setup.</p>
+      <div class="device-actions" role="toolbar" aria-label="Device tools">
+        <button class="ghost-button" id="edit-local-clients" type="button">Local clients → Core</button>
+        <button class="ghost-button" id="jump-pairing" type="button">Client identities →</button>
+        <button class="ghost-button" id="jump-vessel-setup" type="button">Vessel setup →</button>
+        <button class="ghost-button" id="device-refresh-all" type="button">Refresh all ↻</button>
+      </div>
+      <section class="device-builds" aria-labelledby="builds-heading">
+        <div class="device-actions"><h3 id="builds-heading">Installed &amp; running</h3><button type="button" class="ghost-button" id="device-build-refresh">Check versions</button></div>
+        <p class="device-note">This PC, your configured Core and previously enrolled SSH devices. Source changes are compared with each process at startup. Older processes and packaged apps may need a restart or rebuild before their version can be verified.</p>
+        <p id="device-build-status" role="status" aria-live="polite">Check versions to read current device status.</p>
+        <div id="device-build-results"></div>
+      </section>
+      <div id="device-hosts" class="device-hosts"></div>
+      <h3>Active Core routes</h3>
+      <p class="device-note">Edit host/port, keep the API path. Voice nodes retain their profiles, priority and credentials. No changes are applied until preview and confirmation.</p>
+      <div id="device-routes"></div>
+      <details class="device-inventory"><summary>Documented placement · all services</summary><div id="device-inventory"></div></details>
+      <section id="device-plan" hidden aria-label="Routing change preview"><h3>Review before applying</h3><pre id="device-diff"></pre>
+        <label><input type="checkbox" id="device-confirm" /> I trust the new devices and understand existing service tokens will be sent there.</label>
+      </section>
+      <footer class="prompt-footer"><span id="device-status" role="status" aria-live="polite"></span>
+        <button class="ghost-button" id="device-reload" type="button">Reload</button>
+        <button class="ghost-button" id="device-preview" type="button" disabled>Check &amp; preview</button>
+        <button class="primary-button" id="device-apply" type="button" disabled>Apply routes</button></footer>
+    </dialog>
+    <dialog id="vessel-setup-editor" class="prompt-editor" aria-labelledby="vessel-setup-heading">
+      <header class="prompt-header"><div><p class="eyebrow">DEVICES / SERVICE ACCESS</p><h2 id="vessel-setup-heading">Vessel setup.</h2></div>
+        <button class="ghost-button" id="vessel-setup-close" type="button">Back to devices</button></header>
+        <p class="step-intro">Run setup on the new device, choose a vessel and enter your Core address. Approve its matching code here.</p>
+        <p class="device-note">No SSH needed for Home, Tool, STT, Finance, Stream Voice and single-node SoVITS connections. Models and account settings remain on their device.</p>
+        <h3>Connection requests</h3><div id="vessel-join-requests"></div>
+        <p id="vessel-join-status" role="status"></p>
+        <details id="vessel-advanced"><summary>Advanced · SSH credential management</summary>
+        <p class="device-note">Manage devices already enrolled for SSH credential operations. New SSH device enrollment is disabled here. Use the IP-based Core setup above for supported vessels.</p>
+      <div id="vessel-managed-hosts" class="vessel-host-strip"></div>
+      <h3>Service connections</h3>
+      <p class="device-note">Select the vessel host and every caller that uses its token. Additional deployments, profile-specific voice tokens and custom callers need separate configuration; do not omit them. These controls change service access, not the shared Owner API token.</p>
+      <div id="vessel-service-list" class="pairing-list"></div>
+      <section id="vessel-action-review" class="vessel-review" hidden aria-label="Credential operation review">
+        <h3>Review service access</h3><p id="vessel-review-description"></p>
+        <button class="primary-button" id="vessel-confirm-action" type="button">Apply</button>
+        <button class="ghost-button" id="vessel-cancel-action" type="button">Cancel</button>
+      </section>
+      <h3>Operations</h3><div id="vessel-operation-list"></div>
+      <details><summary>Recent history</summary><div id="vessel-history"></div></details>
+        </details>
+        <footer class="prompt-footer"><span id="vessel-setup-status" role="status" aria-live="polite"></span>
+        <button class="ghost-button" id="vessel-setup-refresh" type="button">Refresh</button></footer>
+    </dialog>
+    <script type="module" src="/vessel-setup.js"></script>
+    <dialog id="pairing-editor" class="prompt-editor pairing-editor" aria-labelledby="pairing-heading">
+      <header class="prompt-header"><div><p class="eyebrow">SECURITY / CLIENT IDENTITIES</p><h2 id="pairing-heading">Client identities.</h2></div>
+        <button class="ghost-button" id="pairing-close" type="button">Close ×</button></header>
+      <section id="pairing-panel" class="pairing-panel">
+        <p class="device-note">Updated Android clients sign in with their paired device key. Choose Owner only for your trusted phone. Other roles currently support health.read only; private data and actions stay blocked. Legacy shared tokens require separate rotation.</p>
+        <div class="pairing-invite-controls">
+          <label>Role<select id="pairing-role"><option value="resident">Resident</option><option value="guest">Guest</option><option value="dashboard">Dashboard</option><option value="owner">Owner</option></select></label>
+          <label>Scopes (comma-separated)<input id="pairing-scopes" type="text" maxlength="1024" placeholder="health.read" autocomplete="off" /></label>
+          <button class="primary-button" id="pairing-create" type="button">Create 2-minute invitation</button>
+        </div>
+        <div id="pairing-invite" class="pairing-invite" hidden>
+          <p>Copy this invitation once. The new client submits its P-256 public key with it. The owner must still match the six-digit code before approval.</p>
+          <input id="pairing-token" type="text" readonly aria-label="One-time pairing invitation" />
+          <button class="ghost-button" id="pairing-copy" type="button">Copy invitation</button>
+          <small id="pairing-expiry"></small>
+        </div>
+        <h3>Waiting for approval</h3><div id="pairing-requests" class="pairing-list"></div>
+        <h3>Registered devices</h3><div id="paired-devices" class="pairing-list"></div>
+        <details><summary>Device history</summary><div id="pairing-history" class="pairing-history"></div></details>
+      </section>
+      <footer class="prompt-footer"><span id="pairing-status" role="status" aria-live="polite"></span>
+        <button class="ghost-button" id="pairing-refresh" type="button">Refresh</button></footer>
+    </dialog>
+    <dialog id="client-editor" class="prompt-editor" aria-labelledby="client-heading">
+      <header class="prompt-header"><div><p class="eyebrow">THIS CHECKOUT / CLIENT CONNECTIONS</p><h2 id="client-heading">One Core. Your clients.</h2></div>
+        <button class="ghost-button" id="client-close" type="button">Close ×</button></header>
+      <p id="client-scope" class="step-intro"></p>
+      <p class="device-note">Choose local clients to point at the same Core. Nothing on Lily-Core-Host or another PC is edited. Installed HUD and packaged frontends need a rebuild, not just a restart.</p>
+      <label for="client-core">Target Core origin</label>
+      <input id="client-core" type="url" placeholder="http://198.51.100.1:8000" maxlength="512" autocomplete="off" />
+      <div id="client-list"></div>
+      <section id="client-plan" hidden><h3>Review local changes</h3><pre id="client-diff"></pre>
+        <label><input id="client-confirm" type="checkbox" /> I trust this Core with the selected clients' existing credentials.</label>
+      </section>
+      <footer class="prompt-footer"><span id="client-status" role="status" aria-live="polite"></span>
+        <button class="ghost-button" id="client-reload" type="button">Reload</button>
+        <button class="ghost-button" id="client-preview" type="button" disabled>Preview local changes</button>
+        <button class="primary-button" id="client-apply" type="button" disabled>Save local clients</button></footer>
+    </dialog>
+    <dialog id="secretary-editor" class="prompt-editor secretary-editor" aria-labelledby="secretary-heading">
+      <form id="secretary-form">
+        <header class="prompt-header"><div><p class="eyebrow">PERSONAL WHATSAPP / YOUR RULES</p><h2 id="secretary-heading">Leave it with Lily.</h2></div>
+          <button class="ghost-button" id="secretary-close" type="button">Close ×</button></header>
+        <p id="secretary-target" class="step-intro">Loading secretary settings…</p>
+        <p id="secretary-runtime-status" class="device-note" role="status" aria-live="polite">Checking WhatsApp connection…</p>
+        <fieldset id="secretary-fields" disabled>
+          <section class="secretary-activation">
+            <div><span class="eyebrow">REPLY CONTROL</span><h3 id="secretary-state">Off</h3><p>Nothing changes until you save. Contact rules also apply while automatic replies are off.</p></div>
+            <label for="secretary-mode">Secretary mode<select id="secretary-mode" name="mode"><option value="off">Off — no automatic replies</option><option value="auto">Auto — only when I am marked busy</option><option value="active">On — handle incoming conversations</option></select></label>
+          </section>
+          <div class="secretary-columns">
+            <section><p class="eyebrow">01 / CONVERSATION</p><h3>How Lily responds</h3>
+              <label for="secretary-prompt">System prompt</label><textarea id="secretary-prompt" name="system_prompt" rows="12" maxlength="16000" spellcheck="false"></textarea>
+              <button id="secretary-default-prompt" class="ghost-button" type="button">Use default prompt</button>
+              <p class="device-note">Edit tone, introductions and what to ask. Contact isolation and owner-only decisions remain enforced separately.</p>
+            </section>
+            <section><p class="eyebrow">02 / PACING</p><h3>Give me time to reply</h3>
+              <div class="secretary-timing">
+                <label>First reply · seconds<input name="first_reply_seconds" type="number" min="5" max="1800" required></label>
+                <label>Follow-up · seconds<input name="followup_seconds" type="number" min="2" max="120" required></label>
+                <label>Pause after I reply · minutes<input name="handoff_minutes" type="number" min="1" max="1440" required></label>
+                <label>Conversation window · minutes<input name="conversation_minutes" type="number" min="1" max="120" required></label>
+                <label>Replies before handing back<input name="max_replies" type="number" min="1" max="20" required></label>
+                <label>Summary delay · seconds<input name="summary_delay_seconds" type="number" min="0" max="300" required></label>
+                <label>Replies per contact · hour<input name="per_contact_send_limit_per_hour" type="number" min="1" max="60" required></label>
+                <label>Replies total · hour<input name="global_send_limit_per_hour" type="number" min="1" max="500" required></label>
+              </div>
+            </section>
+          </div>
+          <section class="secretary-contacts"><p class="eyebrow">03 / CONTACT RULES</p><h3>Who gets a reply?</h3>
+            <label for="secretary-default-action">For numbers without a rule<select id="secretary-default-action" name="default_action"><option value="secretary">Secretary — reply when enabled</option><option value="summary_only">Summary only — forward, never reply</option><option value="ignore">Ignore completely</option></select></label>
+            <p class="device-note">Ignore: no new inbox capture, summary, forwarding or reply. Summary only: collect and forward without replying. Existing history is not deleted. Use 08… or an international number.</p>
+            <div id="secretary-contacts"></div>
+            <button class="ghost-button" id="secretary-add-contact" type="button">+ Add number</button>
+            <button class="ghost-button" id="secretary-google-contacts" type="button">Choose from Google Contacts</button>
+          </section>
+          <section class="secretary-contacts"><p class="eyebrow">04 / MESSAGE SORTING</p><h3>Promotions & deliveries</h3>
+            <label for="secretary-triage-mode">Sorting mode<select id="secretary-triage-mode" name="triage_mode"><option value="shadow">Preview only — show proposed categories, keep notifications</option><option value="enforce">Apply — quiet clear promotions, flag delivery</option></select></label>
+            <p class="device-note" id="secretary-triage-note">Delivery and uncertain messages never get automatic replies. Promotions remain in the inbox. Sorting starts in preview mode.</p>
+          </section>
+          <section class="secretary-contacts" id="inbox-notification-settings"><p class="eyebrow">05 / YOUR ATTENTION</p><h3>Where & when to notify</h3>
+            <p class="device-note">The inbox always keeps the latest summary. Choose one destination to avoid duplicate alerts, or select several deliberately. Phone alerts use background checks and may arrive later.</p>
+            <div class="review-toolbar">
+              <label><input type="checkbox" name="notify_wa"> WhatsApp</label>
+              <label><input type="checkbox" name="notify_mobile"> Phone</label>
+              <label><input type="checkbox" name="notify_hud"> Desktop HUD</label>
+            </div>
+            <div class="secretary-timing">
+              <label>Routine messages<select name="notify_mode"><option value="immediate">As they arrive</option><option value="digest">Collect into a digest</option></select></label>
+              <label>Digest interval · minutes<input name="notify_digest_minutes" type="number" min="1" max="1440" value="15" required></label>
+              <label>Quiet hours begin<input name="notify_quiet_start" type="time" value="22:00" required></label>
+              <label>Quiet hours end<input name="notify_quiet_end" type="time" value="07:00" required></label>
+              <label>Time zone<select name="notify_timezone"><option>Asia/Jakarta</option><option>Asia/Makassar</option><option>Asia/Jayapura</option><option>Asia/Tokyo</option><option>UTC</option></select></label>
+            </div>
+            <div class="review-toolbar">
+              <label><input type="checkbox" name="notify_quiet_enabled"> Hold routine alerts during quiet hours</label>
+              <label><input type="checkbox" name="notify_urgent_immediate" checked> Deliveries and decisions can interrupt</label>
+            </div>
+            <p class="device-note">Explicit reminders use their chosen time, including during quiet hours. These settings do not enable automatic replies. HUD alerts also need notifications enabled in the HUD window.</p>
+          </section>
+        </fieldset>
+        <footer class="prompt-footer"><span id="secretary-status" role="status" aria-live="polite"></span>
+          <button class="ghost-button" id="secretary-stop" type="button">Stop Secretary</button>
+          <button class="ghost-button" id="secretary-reload" type="button">Reload</button>
+          <button class="primary-button" id="secretary-save" type="submit" disabled>Save settings</button></footer>
+      </form>
+    </dialog>
+    <script src="/app.js"></script>
+    <script type="module" src="/prompts.js"></script>
+    <script type="module" src="/devices.js"></script>
+    <script type="module" src="/pairing.js"></script>
+    <script type="module" src="/clients.js"></script>
+    <script type="module" src="/secretary.js"></script>
+  </body>
+</html>

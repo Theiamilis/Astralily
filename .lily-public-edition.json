@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "edition": "AstraLily Public Edition",
+  "source_revision": "b8a988f",
+  "source_worktree_dirty": true,
+  "included_components": [
+    "lily_essence_core",
+    "lily_control_center",
+    "lily_private_realm",
+    "lily_mobile_realm_android",
+    "lily_wa_vessel",
+    "lily_voice_vessel",
+    "lily_tool_vessel",
+    "lily_model_vessel",
+    "lily_home_vessel",
+    "lily_stt_vessel",
+    "iris_launcher"
+  ],
+  "excluded_components": [
+    "lily_finance_vessel",
+    "lily_family_android",
+    "lily_family_gateway",
+    "lily_owner_gateway",
+    "lily_listener_vessel",
+    "core_dev",
+    "lily_stream_stage",
+    "lily_stream_voice_vessel",
+    "lily_hotkey_vessel",
+    "lily_hud_vessel",
+    "lily_file_vessel",
+    "lily_essence_core/tiktok_bridge.py",
+    "lily_essence_core/tiktok_bridge_node/"
+  ]
+}

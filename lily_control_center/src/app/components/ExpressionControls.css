@@ -1,0 +1,65 @@
+.lily-expression-controls {
+  color: #41213a;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.lily-expression-controls p {
+  margin: 0 0 12px;
+  overflow-wrap: anywhere;
+}
+
+.lily-expression-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.lily-expression-controls button {
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid #95677f;
+  border-radius: 9px;
+  background: #fff;
+  color: #5c334b;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.lily-expression-controls button:hover {
+  background: #fbe6ef;
+}
+
+.lily-expression-controls button[aria-pressed="true"] {
+  background: #5c334b;
+  color: #fff;
+}
+
+.lily-expression-controls button:focus-visible {
+  outline: 3px solid #41213a;
+  outline-offset: 3px;
+}
+
+.lily-expression-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.lily-expression-actions button {
+  flex: 1;
+}
+
+.lily-expression-controls button:disabled {
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+.lily-expression-hint {
+  color: #765268;
+  font-size: 0.75rem;
+}

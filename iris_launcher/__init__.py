@@ -1,0 +1,2 @@
+"""IRIS desktop launcher package."""
+

@@ -1,0 +1,16 @@
+*
+!lily_essence_core/
+!lily_essence_core/**
+!config/
+!config/**
+
+**/.env
+**/.env.*
+**/venv/
+**/__pycache__/
+**/*.pyc
+**/runtime/
+**/runtime-dev/
+lily_essence_core/static/audio/*
+lily_essence_core/static/tool_artifacts/
+lily_essence_core/static/tool_inputs/

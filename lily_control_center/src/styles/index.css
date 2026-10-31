@@ -1,0 +1,25 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+.lily-presence-stage {
+  transform-origin: 50% 100%;
+  animation: lilyPresenceSway 13s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes lilyPresenceSway {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-0.16deg);
+  }
+
+  50% {
+    transform: translate3d(0, -2px, 0) rotate(0.16deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lily-presence-stage {
+    animation: none;
+  }
+}

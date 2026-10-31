@@ -1,0 +1,55 @@
+:root {
+  --bg-primary: #f6dce8;
+  --accent-primary: #5c334b;
+  --accent-secondary: #df4a8e;
+  --text-primary: #412f3b;
+  --text-body: #775e71;
+  --text-secondary: #775e71;
+  --text-label: #9f6383;
+  font-family: "Yu Gothic UI", "Noto Sans JP", "Meiryo UI", "Meiryo", "Segoe UI", sans-serif;
+  color: var(--text-body);
+  background: var(--bg-primary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(169, 124, 210, 0.42);
+}

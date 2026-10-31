@@ -1,0 +1,15 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Only the authenticated loopback launcher can hide its native window.",
+  "windows": ["main"],
+  "remote": { "urls": ["http://127.0.0.1:5240/*"] },
+  "permissions": [
+    "core:window:allow-hide",
+    "core:window:allow-set-theme",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-close",
+    "core:window:allow-start-dragging"
+  ]
+}

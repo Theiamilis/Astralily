@@ -1,0 +1,22 @@
+[
+  {"text":"Paket Anda sedang diantar kurir hari ini, resi ABC123","category":"delivery"},
+  {"text":"Kurir paket: mohon kirim OTP untuk pengiriman","category":"sensitive_delivery"},
+  {"text":"Your parcel is out for delivery today","category":"delivery"},
+  {"text":"Your package is delayed. We will update you.","category":"delivery"},
+  {"text":"Delivery update: change address at https://example.test/pay","category":"sensitive_delivery"},
+  {"text":"Your package has a customs fee. Pay now.","category":"sensitive_delivery"},
+  {"text":"Promo diskon 30%, beli sekarang!","category":"promotion"},
+  {"text":"Flash sale, stok terbatas. Klik link untuk voucher.","category":"promotion"},
+  {"text":"Special offer: 30% discount. Buy now!","category":"promotion"},
+  {"text":"Minta tolong belikan paket data ya","category":"uncertain"},
+  {"text":"Paket yang saya pesan kemarin, sudah sampai belum?","category":"delivery"},
+  {"text":"Ada diskon buat paket yang kamu pesan?","category":"uncertain"},
+  {"text":"Kurir paket diskon, beli sekarang","category":"uncertain"},
+  {"text":"https://shopee.example/item","category":"uncertain"},
+  {"text":"Forwarded: beli sekarang ya","category":"uncertain","metadata":{"isForwarded":true}},
+  {"text":"Halo, apa kabar?","category":"personal"},
+  {"text":"荷物は配達中です","category":"delivery"},
+  {"text":"荷物の住所変更はこちら https://example.test","category":"sensitive_delivery"},
+  {"text":"期間限定セール、今すぐ購入！","category":"promotion"},
+  {"text":"クーポンありますか？","category":"uncertain"}
+]

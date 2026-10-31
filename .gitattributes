@@ -1,0 +1,21 @@
+* text=auto
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.sh text eol=lf
+scripts/lily text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.moc3 binary
+*.wav binary
+*.ogg binary
+*.mp3 binary
+*.rar binary
+*.zip binary
+*.tar.gz binary

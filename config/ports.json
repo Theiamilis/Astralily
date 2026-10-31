@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "frontend_range": [
+      5230,
+      5249
+    ],
+    "core_range": [
+      8000,
+      8009
+    ],
+    "bridge_tool_range": [
+      8090,
+      8099
+    ],
+    "vessel_media_range": [
+      10880,
+      10899
+    ],
+    "notes": [
+      "Public Edition ports cover only the components shipped in this repository.",
+      "External model runtimes remain user-supplied dependencies."
+    ]
+  },
+  "services": [
+    {
+      "id": "private_realm",
+      "label": "Private Realm",
+      "component": "lily_private_realm",
+      "port": 5230,
+      "protocol": "tcp",
+      "kind": "frontend",
+      "health_path": "/"
+    },
+    {
+      "id": "control_center",
+      "label": "Control Center",
+      "component": "lily_control_center",
+      "port": 5231,
+      "protocol": "tcp",
+      "kind": "frontend",
+      "health_path": "/"
+    },
+    {
+      "id": "iris_launcher",
+      "label": "IRIS Launcher",
+      "component": "iris_launcher",
+      "port": 5240,
+      "protocol": "tcp",
+      "kind": "frontend",
+      "health_path": "/api/ping"
+    },
+    {
+      "id": "core",
+      "label": "Essence Core",
+      "component": "lily_essence_core",
+      "port": 8000,
+      "protocol": "tcp",
+      "kind": "core",
+      "health_path": "/health/live"
+    },
+    {
+      "id": "wa_personal",
+      "label": "WA Vessel (Personal)",
+      "component": "lily_wa_vessel",
+      "port": 8091,
+      "protocol": "tcp",
+      "kind": "bridge_tool",
+      "health_path": "/health/ready"
+    },
+    {
+      "id": "tool_vessel",
+      "label": "Tool Vessel",
+      "component": "lily_tool_vessel",
+      "port": 8092,
+      "protocol": "tcp",
+      "kind": "bridge_tool",
+      "health_path": "/health"
+    },
+    {
+      "id": "wa_public",
+      "label": "WA Vessel (Public)",
+      "component": "lily_wa_vessel",
+      "port": 8093,
+      "protocol": "tcp",
+      "kind": "bridge_tool",
+      "health_path": "/health/ready"
+    },
+    {
+      "id": "gpt_sovits",
+      "label": "GPT-SoVITS Engine",
+      "component": "tools/GPT-SoVITS",
+      "port": 10880,
+      "protocol": "tcp",
+      "kind": "vessel_media",
+      "health_path": "/"
+    },
+    {
+      "id": "voice_vessel",
+      "label": "Voice Vessel",
+      "component": "lily_voice_vessel",
+      "port": 10881,
+      "protocol": "tcp",
+      "kind": "vessel_media",
+      "health_path": "/health"
+    },
+    {
+      "id": "stt_vessel",
+      "label": "STT Vessel",
+      "component": "lily_stt_vessel",
+      "port": 10894,
+      "protocol": "tcp",
+      "kind": "vessel_media",
+      "health_path": "/health"
+    },
+    {
+      "id": "home_vessel",
+      "label": "Home Vessel",
+      "component": "lily_home_vessel",
+      "port": 10896,
+      "protocol": "tcp",
+      "kind": "vessel_media",
+      "health_path": "/health"
+    },
+    {
+      "id": "model_vessel",
+      "label": "Model Vessel",
+      "component": "lily_model_vessel",
+      "port": 10898,
+      "protocol": "tcp",
+      "kind": "vessel_media",
+      "health_path": "/health"
+    }
+  ],
+  "portless_components": [
+    {
+      "id": "mobile_realm",
+      "label": "Mobile Realm",
+      "component": "lily_mobile_realm_android",
+      "reason": "Android client; it connects to Core and vessels."
+    }
+  ],
+  "external_dependencies": [
+    {
+      "id": "wake_on_lan",
+      "label": "Wake-on-LAN",
+      "port": 9,
+      "protocol": "udp"
+    },
+    {
+      "id": "lm_studio",
+      "label": "LM Studio",
+      "port": 1234,
+      "protocol": "tcp"
+    },
+    {
+      "id": "openai_compat",
+      "label": "OpenAI-compatible provider",
+      "port": 1430,
+      "protocol": "tcp"
+    },
+    {
+      "id": "openclaw_gateway",
+      "label": "OpenClaw Gateway",
+      "port": 18789,
+      "protocol": "tcp"
+    },
+    {
+      "id": "mongodb",
+      "label": "MongoDB",
+      "port": 27017,
+      "protocol": "tcp"
+    },
+    {
+      "id": "wiz_udp",
+      "label": "WiZ local control",
+      "port": 38899,
+      "protocol": "udp"
+    }
+  ],
+  "retired_ports": [
+    {
+      "port": 5173,
+      "reason": "Old Private Realm Vite default; conflicts with the current Windows exclusion range."
+    },
+    {
+      "port": 5174,
+      "reason": "Old Control Center Vite default; conflicts with the current Windows exclusion range."
+    },
+    {
+      "port": 5176,
+      "reason": "Old Stream Stage Vite default; conflicts with the current Windows exclusion range."
+    },
+    {
+      "port": 9880,
+      "reason": "Old GPT-SoVITS default; replaced by 10880."
+    },
+    {
+      "port": 9881,
+      "reason": "Old Voice Vessel default; replaced by 10881."
+    }
+  ]
+}
