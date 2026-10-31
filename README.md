@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/astralily-mark.svg" width="112" height="112" alt="AstraLily star and A mark">
+  <img src="docs/assets/astralily-mark.svg" width="112" height="112" alt="AstraLily floral constellation mark">
 </p>
 
 <h1 align="center">AstraLily</h1>
